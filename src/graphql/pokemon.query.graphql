@@ -1,0 +1,42 @@
+query Pokemon($id: Int!) {
+  pokemon: pokemon_v2_pokemon(where: {id: {_eq: $id}}) {
+    isFavourite @client
+    hp @client
+    attack @client
+    defense @client
+    specialAttack @client
+    specialDefense @client
+    speed @client
+    height
+    weight
+    id
+    name
+    experience: base_experience
+    types: pokemon_v2_pokemontypes {
+      info: pokemon_v2_type {
+        name
+      }
+    }
+    stats: pokemon_v2_pokemonstats {
+      value: base_stat
+      info: pokemon_v2_stat {
+        name
+      }
+    },
+    specy: pokemon_v2_pokemonspecy {
+      descriptions: pokemon_v2_pokemonspeciesflavortexts(where: {
+        # english
+        language_id: {_eq: 9},
+        # emerald
+        version_id: {_eq: 9}
+      }) {
+        text: flavor_text
+      }
+    }
+    abilities: pokemon_v2_pokemonabilities {
+      info: pokemon_v2_ability {
+        name
+      }
+    }
+  }
+}

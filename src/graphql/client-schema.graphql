@@ -1,0 +1,13 @@
+extend type Query {
+  favourites: [ID!]!
+}
+
+type pokemon_v2_pokemon {
+  isFavourite: Boolean!
+  hp: Int!
+  attack: Int!
+  defense: Int!
+  specialAttack: Int!
+  specialDefense: Int!
+  speed: Int!
+}

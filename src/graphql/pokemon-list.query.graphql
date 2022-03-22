@@ -1,0 +1,12 @@
+query PokemonList {
+  pokemon: pokemon_v2_pokemon(limit: 150) {
+    id,
+    name
+    types: pokemon_v2_pokemontypes {
+      id
+      info: pokemon_v2_type {
+        name
+      }
+    }
+  }
+}

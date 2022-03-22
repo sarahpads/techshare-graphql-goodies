@@ -1,0 +1,8 @@
+query PokemonStats($id: Int!) {
+  pokemon: pokemon_v2_pokemon(where: {id: {_eq: $id}}) {
+    stats: pokemon_v2_pokemonstats {
+      id
+      base_stat
+    }
+  }
+}
