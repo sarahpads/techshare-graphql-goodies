@@ -3,7 +3,6 @@ query PokemonList {
     id,
     name
     types: pokemon_v2_pokemontypes {
-      id
       info: pokemon_v2_type {
         name
       }

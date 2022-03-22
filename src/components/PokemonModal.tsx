@@ -6,8 +6,8 @@ import { useState } from "react"
 
 import PokemonAbout from "./PokemonAbout"
 import { usePokemonQuery } from '../graphql'
-import { favouritesVar } from "../global/utils.apollo"
 import PokemonStats from "./PokemonStats"
+import { favouritesVar } from "../global/utils.apollo"
 
 interface PokemonModalProps {
   id: number
@@ -45,6 +45,7 @@ const PokemonModal: React.FC<PokemonModalProps> = ({
   }
 
   const pokemon = data.pokemon[0]
+  console.log(pokemon)
 
   function onToggleFavourite() {
     const favourites = favouritesVar()
@@ -103,7 +104,6 @@ const PokemonModal: React.FC<PokemonModalProps> = ({
 
           <Box height={IMAGE_HEIGHT - 100} />
         </Box>
-
       </Paper>
 
       <Paper

@@ -1,46 +1,31 @@
-# Getting Started with Create React App
+# App Setup
+- `src/global/utils.apollo.ts` creates and configures the ApolloClient
+- all graphql queries are stored in `src/graphql`
+- graphql-codegen is used to generate custom React hooks for each query (https://www.graphql-code-generator.com/)
+- uses the PokeAPI GraphQL API (https://pokeapi.co/docs/graphql)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GraphQL Goodies
+1. Apollo devtools
+    - https://www.apollographql.com/docs/react/development-testing/developer-tooling/#apollo-client-devtools)
+    - *NOTE:* This extension conflicts with react devtools; you will need to disable that extension in order for this one to display reliably
 
-## Available Scripts
+2. `keyFields` and `cacheIds`
+    - Apollo identifies the distinct objects within a query response
+    - It will then generate a cache id for each
+    - By default, this is type:id
+    - If Apollo isn't able to generate a cache id, that object it stored on the parent
+    - https://www.apollographql.com/docs/react/caching/overview/#1-identify-objects
+    - https://www.apollographql.com/docs/react/caching/cache-configuration/#customizing-cache-ids
 
-In the project directory, you can run:
+3. Client-side fields
+    - Allows you to customize how a particular field is read from the cache
+    - You can massage an existing value that already exists in the cache (like capitalizing a name)
+    - You can create brand new fields that don't exist in the schema, but you will need to add the @client directive to the gql field so that it isn't sent to the server (like isFavourite)
+    - https://www.apollographql.com/docs/react/local-state/managing-state-with-field-policies
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. Reactive variables
+    - Allows you to represent local data outside of the cache
+    - They aren't beholden to schemas, so can store data of any type or structure
+    - Modifying a reactive variable triggers an update of any active query that depends on that variable
+    - https://www.apollographql.com/docs/react/local-state/reactive-variables
+    - *NOTE:* Hot reloading buggers them up

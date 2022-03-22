@@ -11,14 +11,8 @@ export const favouritesVar = makeVar<Set<number>>(new Set())
 export function getApolloClient(): ApolloClient<NormalizedCacheObject> {
   const cache = new InMemoryCache({
     typePolicies: {
-      Query: {
-        fields: {
-          favourites: {
-            read() {
-              return favouritesVar()
-            }
-          }
-        }
+      pokemon_v2_type: {
+        keyFields: ['name']
       },
       pokemon_v2_pokemon: {
         fields: {
@@ -31,7 +25,7 @@ export function getApolloClient(): ApolloClient<NormalizedCacheObject> {
           name: {
             read(existing) {
               return existing?.split(' ')
-                .map((word: string) => word.charAt(0) + word.substring(1))
+                .map((word: string) => word.charAt(0).toUpperCase() + word.substring(1))
                 .join(' ')
             }
           },

@@ -51731,21 +51731,21 @@ export type Subscription_RootPokemon_V2_Versionname_By_PkArgs = {
 export type PokemonListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PokemonListQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, types: Array<{ __typename?: 'pokemon_v2_pokemontype', id: number, info?: { __typename?: 'pokemon_v2_type', name: string } | null }> }> };
+export type PokemonListQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, types: Array<{ __typename?: 'pokemon_v2_pokemontype', info?: { __typename?: 'pokemon_v2_type', name: string } | null }> }> };
 
 export type PokemonStatsQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type PokemonStatsQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', id: number, base_stat: number }> }> };
+export type PokemonStatsQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number }> }> };
 
 export type PokemonQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
 
 
-export type PokemonQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', isFavourite: boolean, hp: number, attack: number, defense: number, specialAttack: number, specialDefense: number, speed: number, height?: number | null, weight?: number | null, id: number, name: string, experience?: number | null, types: Array<{ __typename?: 'pokemon_v2_pokemontype', info?: { __typename?: 'pokemon_v2_type', id: number, name: string } | null }>, stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', value: number, info?: { __typename?: 'pokemon_v2_stat', id: number, name: string } | null }>, specy?: { __typename?: 'pokemon_v2_pokemonspecies', descriptions: Array<{ __typename?: 'pokemon_v2_pokemonspeciesflavortext', text: string }> } | null, abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', info?: { __typename?: 'pokemon_v2_ability', name: string } | null }> }> };
+export type PokemonQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', isFavourite: boolean, hp: number, attack: number, defense: number, specialAttack: number, specialDefense: number, speed: number, height?: number | null, weight?: number | null, id: number, name: string, experience?: number | null, types: Array<{ __typename?: 'pokemon_v2_pokemontype', info?: { __typename?: 'pokemon_v2_type', name: string } | null }>, stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', value: number, info?: { __typename?: 'pokemon_v2_stat', name: string } | null }>, specy?: { __typename?: 'pokemon_v2_pokemonspecies', descriptions: Array<{ __typename?: 'pokemon_v2_pokemonspeciesflavortext', text: string }> } | null, abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', info?: { __typename?: 'pokemon_v2_ability', name: string } | null }> }> };
 
 
 export const PokemonListDocument = gql`
@@ -51754,7 +51754,6 @@ export const PokemonListDocument = gql`
     id
     name
     types: pokemon_v2_pokemontypes {
-      id
       info: pokemon_v2_type {
         name
       }
@@ -51793,7 +51792,6 @@ export const PokemonStatsDocument = gql`
     query PokemonStats($id: Int!) {
   pokemon: pokemon_v2_pokemon(where: {id: {_eq: $id}}) {
     stats: pokemon_v2_pokemonstats {
-      id
       base_stat
     }
   }
@@ -51844,14 +51842,12 @@ export const PokemonDocument = gql`
     experience: base_experience
     types: pokemon_v2_pokemontypes {
       info: pokemon_v2_type {
-        id
         name
       }
     }
     stats: pokemon_v2_pokemonstats {
       value: base_stat
       info: pokemon_v2_stat {
-        id
         name
       }
     }
